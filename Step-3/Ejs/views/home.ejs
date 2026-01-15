@@ -1,0 +1,13 @@
+<%- include('component/header.ejs') %>
+    <h1><% product.map(item=>{%>
+    <h2><%=item.home%>
+    </h2><%}) %></h1>
+    <h3>This are the Products</h3>
+    <ul>
+        <% product.forEach(p=>{%>
+            <li>
+                <%= p.name%>
+            </li>
+            <%}) %>
+    </ul>
+    <%- include('component/footer.ejs') %>
