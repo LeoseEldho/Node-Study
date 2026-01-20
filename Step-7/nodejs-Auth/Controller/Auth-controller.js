@@ -1,0 +1,56 @@
+const User = require("../modules/User");
+const bcrypt = require("bcryptjs");
+const jwt=require("jsonwebtoken")
+
+const registerUser = async (req, res) => {
+  try {
+    const { userName, email, password, role } = req.body;
+    const userExist = await User.findOne({ $or: [{ userName }, { email }] });
+    if (userExist) {
+     return res 
+        .status(400)
+        .json({
+          message: "This username or email has been taken,Try another..",
+        });
+    }
+    const salt = await bcrpt.genSalt(10);
+    const hash = await bcrpt.hash(password, salt);
+    const newCreatedUser =await User.create({
+      userName,
+      email,
+      password: hash,
+      role: role || "User",
+    });
+    if (newCreatedUser) {
+      res
+        .status(200)
+        .json({ message: "Registered New User", data: newCreatedUser });
+    } else {
+      res.status(404).json({ message: "Unable to Register" });
+    }
+  } catch (error) {
+    console.log("Something Occure error!", error);
+  }
+};
+const loginUser = async (req, res) => {
+    try {
+        const { userName, password } = req.body
+        const user = await User.findOne({userName})
+        if (!user) {
+            return res.status(404).json({message:"User not Found!."})
+      }
+      const isPassword = await bcrypt.compare(password, user.password);
+      
+      const accessToken = jwt.sign({
+        userId: user._id,
+        username: user.userName,
+        role:user.role
+      }, process.env.JWT_KEY, { expiresIn: "15m" })
+      
+      res.status(200).json({message:"Loggin Successfully",accessToken})
+      
+  } catch (error) {
+    console.log("Something Occure error!", error);
+  }
+};
+module.exports = { registerUser, loginUser };

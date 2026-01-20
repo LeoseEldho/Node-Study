@@ -6,6 +6,7 @@ const dataConnection = async  () => {
         console.log("Server connected Successfully")
     } catch (err) {
         console.log(err)
+         process.exit(1);
     }
 };
 module.exports=dataConnection
