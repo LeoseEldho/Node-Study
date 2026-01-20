@@ -13,8 +13,8 @@ const registerUser = async (req, res) => {
           message: "This username or email has been taken,Try another..",
         });
     }
-    const salt = await bcrpt.genSalt(10);
-    const hash = await bcrpt.hash(password, salt);
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
     const newCreatedUser =await User.create({
       userName,
       email,
@@ -37,12 +37,12 @@ const loginUser = async (req, res) => {
         const { userName, password } = req.body
         const user = await User.findOne({userName})
         if (!user) {
-            return res.status(404).json({message:"User not Found!."})
+            return res.status(404).json({message:"Register first !."})
       }
       const isPassword = await bcrypt.compare(password, user.password);
       
       const accessToken = jwt.sign({
-        userId: user._id,
+        userId: user.id,
         username: user.userName,
         role:user.role
       }, process.env.JWT_KEY, { expiresIn: "15m" })
