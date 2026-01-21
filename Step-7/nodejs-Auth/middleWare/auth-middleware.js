@@ -4,7 +4,7 @@ const authMiddleWare = (req, res, next) => {
      const authHeader=req.headers["authorization"]
     const token = authHeader && authHeader.split(" ")[1];
     if (!token) {
-        res.status(404).json({message:"Not Loggined"})
+       return res.status(404).json({message:"Not Loggined"})
     }
     try {
         const decodeToken = jwt.verify(token, process.env.JWT_KEY);

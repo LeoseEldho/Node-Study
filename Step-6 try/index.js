@@ -9,7 +9,7 @@ app.use(express.json())
 app.use("/",route)
 
 
-const PORT=process.env.PORT||300
+const PORT=process.env.PORT||3000
 app.listen(PORT, () => {
     console.log(PORT)
 })
