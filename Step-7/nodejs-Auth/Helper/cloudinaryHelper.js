@@ -5,7 +5,7 @@ const uploadCloudinary = async(filepath) =>{
         const result = await cloudinary.uploader.upload(filepath);
         return {
             url:  result.secure_url,
-            publicId: result.publicId,
+            publicId: result.public_id  ,
         };
     } catch (error) {
         console.log(error,"Uploading the file Failed")

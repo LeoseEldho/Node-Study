@@ -7,4 +7,4 @@ route.get('/admin',authMiddleWare ,adminmiddleWare,(req, res) => {
     res.status(202).json({message:"Welcome to Admin Page"})
 });
 
-module.exports=route
+module.exports = route;

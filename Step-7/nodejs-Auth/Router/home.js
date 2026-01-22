@@ -4,14 +4,14 @@ const router = express.Router();
 
 
 router.get("/home", authMiddleWare, (req, res) => {
-    const {userId,username,role}=req.userInfo
+    const {userId,userName,role}=req.userInfo
     res.status(200).json({
         message: "Welcome to the Home Page:",
         data: {
-            userId,username,role
+            userId,userName,role
         }
     })
     userName
 });
 
-module.exports=router
+module.exports = router;
