@@ -11,7 +11,7 @@ router.get("/home", authMiddleWare, (req, res) => {
             userId,userName,role
         }
     })
-    userName
+    // userName
 });
 
 module.exports = router;

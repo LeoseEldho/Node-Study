@@ -1,4 +1,4 @@
-const {uploadImage,fetchImage} = require("../Controller/image-controller");
+const {uploadImage,fetchImage,deleteImage} = require("../Controller/image-controller");
 const express = require("express");
 const adminMiddleware = require("../middleWare/admin-middleware");
 const authMiddleware = require("../middleWare/auth-middleware");
@@ -14,6 +14,8 @@ route.post(
   uploadImageMiddleWare.single("image"),
   uploadImage,
 );
+
+route.delete("/:id",authMiddleware,adminMiddleware,deleteImage)
 
 route.get('/all',authMiddleware,fetchImage)
 
