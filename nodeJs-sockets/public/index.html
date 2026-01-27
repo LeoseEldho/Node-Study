@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+</head>
+<body>
+    <div id="user-list">
+        <h2>Online Users</h2>
+        <ul id="users"></ul>
+    </div>
+    <div id="chat"></div>
+    <form id="message-form">
+        <input type="text" id="message-input" placeholder="Enter the Message" required/>
+        <button type="submit">send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket=io();
+        const chat=document.getElementById('chat');
+        const userList=document.getElementById('users');
+        const messageForm=document.getElementById('message-form');
+        const messageInput=document.getElementById('message-input')
+
+
+        const userName=prompt("Enter Name")
+        socket.emit('join',userName);
+
+        socket.on("userJoined",(userName)=>{
+            addMessage(`${userName} user has joined`)
+        })
+
+        socket.on('userList',(users)=>{
+            userList.innerHTML=users.map(user=>`<li>${user}</li>`).join("")
+        })
+
+        function addMessage(input){
+            const message=document.createElement('div');
+            message.textContent=input;
+            chat.appendChild(message);
+
+            chat.scrollTop=chat.scrollHeight
+            
+        }
+    </script>
+</body>
+</html>
