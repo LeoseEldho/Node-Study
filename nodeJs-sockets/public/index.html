@@ -30,9 +30,29 @@
         socket.on("userJoined",(userName)=>{
             addMessage(`${userName} user has joined`)
         })
+        socket.on('userList',u=>{
+            addMessage(`${u} has left the message`)
+        })
 
         socket.on('userList',(users)=>{
             userList.innerHTML=users.map(user=>`<li>${user}</li>`).join("")
+        })
+
+        socket.on('message',(message)=>{
+            addMessage(`${message.userName}:${message.data}`)
+        })
+
+        messageForm.addEventListener("submit",(event)=>{
+            event.preventDefault();
+
+            const exactMessage=messageInput.value.trim()
+            if(exactMessage){
+                socket.emit("message",{
+                    userName,
+                    data:exactMessage
+                })
+            }
+            messageInput.value="";
         })
 
         function addMessage(input){

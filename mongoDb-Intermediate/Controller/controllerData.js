@@ -1,4 +1,4 @@
-const author = require("../Model/Auther");
+const author = require("../Model/author");
 const book = require("../Model/Book");
 
 const createAuther = async (req, res) => {
