@@ -4,7 +4,7 @@ const productSchema = new mogoose.Schema({
     title: {
         type:String,required:true
     },
-    catagory: {
+    category: {
         type:String,required:true
     },
     price: {

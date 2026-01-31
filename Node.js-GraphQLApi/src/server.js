@@ -6,14 +6,15 @@ const typeDefs = require('./graph/schema');
 const serverConnection=require('./DataBase/db')
 
 async function startServer() {
+    await serverConnection()
     const server = new ApolloServer({
         typeDefs,
         resolvers
     })
     const { url } = await startStandaloneServer(server, {
-        listen:{port:process.env.PROT}
+        listen:{port:process.env.PORT}
     })
     console.log(`Server Start at ${url}`)
 }
-serverConnection()
+
 startServer()

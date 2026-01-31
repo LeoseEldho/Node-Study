@@ -1,6 +1,8 @@
+const mongoose=require('mongoose')
+
 async function serverConnection() {
     try {
-        const data = process.env.MONGO_URL
+        const data = mongoose.connect(process.env.MONGO_URL)
         if (!data) {
             console.log("Somthing Went Wrong!!!")
         }
