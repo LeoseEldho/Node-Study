@@ -12,25 +12,16 @@ const resolve = {
         arg
       )
      return await newProducts.save()
+    },
+      updateProduct: async (_, { id ,...update}) => {
+    return await product.findByIdAndUpdate(id,update,{new:true})
+   
+    },
+      
+        deleteProduct: async (_,  {id} ) => {
+    return await product.findByIdAndDelete(id)
     }
-    },
-  // deleteProduct: async (_,  {id} ) => {
-  //   const deleteproduct = await product.findByIdAndDelete(id)
-  //   if (!deleteproduct)return false
-  //   return deleteproduct
-  //   }
-    updataProduct:async (_, arg) => {
-      const index =await product.findIndex((product) => product.id == id);
-      if (index == -1) return false;
-      updateData = {
-        ...products[index],
-        ...update,
-        };
-        products[index]=updateData
-
-      return updateData;
-    },
-
+    }
   }
 
 

@@ -23,7 +23,7 @@ type Mutation{
 
     deleteProduct(id:ID!):Boolean
 
-    updataProduct(id:ID!
+    updateProduct(id:ID!
     title:String
     category:String
     price:Float
