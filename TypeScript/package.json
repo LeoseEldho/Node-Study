@@ -1,18 +1,21 @@
 {
   "name": "typescript",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "build":"tsc",
-    "start": "node dist/app.js",
-    "dev": "ts-node src/app.ts"
+    "dev": "nodemon --watch src --exec ts-node-esm src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "@types/mongoose": "^5.11.96",
+    "express": "^5.2.1",
+    "mongoose": "^9.1.5"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
     "@types/node": "^25.1.0",
+    "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }
