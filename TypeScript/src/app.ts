@@ -1,6 +1,7 @@
 
 import express from "express";
 import type { Express, Request, Response,NextFunction } from "express"
+import { user, type IUser } from "./modle/user.js";
 
 const app:Express = express()
 
@@ -34,6 +35,16 @@ app.get("/get/:id", (req:Request<{id:String}>, res: Response) => {
         userId:id
     })
 })
+
+app.get('/user', async (req, res) => {
+    try {
+        const users: IUser[] = await user.find()
+        
+    } catch (err) {
+        res.status(400).json({message:"Something Went Wronge"})
+    }
+})
+
 const PORT = 3000;
 
 app.listen(PORT, () => {
